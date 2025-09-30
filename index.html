@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <!-- ✅ Mobile viewport fix -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Tic Tac Toe - Powered by Atish</title>
   <style>
     body {
@@ -26,17 +28,20 @@
     h1 {
       margin-bottom: 10px;
       color: #ffcc00;
+      font-size: 32px; /* Bigger title */
     }
 
     .players {
       margin-bottom: 15px;
+      font-size: 18px;
     }
 
     input {
-      padding: 5px 10px;
+      padding: 8px 12px;
       margin: 5px;
       border-radius: 5px;
       border: none;
+      font-size: 16px;
     }
 
     /* Default board (landscape & larger screens) */
@@ -45,8 +50,8 @@
       grid-template-columns: repeat(3, 1fr);
       gap: 8px;
       margin: 20px auto;
-      width: 95vw;         /* nearly full screen */
-      max-width: 95vw;
+      width: 90vw;         /* nearly full screen */
+      max-width: 90vw;
       aspect-ratio: 1;     /* always square */
     }
 
@@ -55,15 +60,14 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 20vw;     /* large X and O */
+      font-size: 14vw;     /* Smaller X and O */
       cursor: pointer;
       border-radius: 12px;
       user-select: none;
       font-weight: bold;
       transition: background 0.3s;
 
-      /* ✅ Fix size shifting */
-      aspect-ratio: 1;     /* keep square shape */
+      aspect-ratio: 1;
       width: 100%;
       height: auto;
       line-height: 1;
@@ -83,34 +87,35 @@
     /* Portrait mode fix (vertical screens) */
     @media (orientation: portrait) {
       .board {
-        width: 80vw;       /* smaller board in vertical */
-        max-width: 80vw;
+        width: 75vw;       /* smaller board in vertical */
+        max-width: 75vw;
       }
       .cell {
-        font-size: 18vw;
+        font-size: 12vw;
         aspect-ratio: 1;
       }
     }
 
     #status {
       margin-top: 15px;
-      font-size: 18px;
+      font-size: 22px;  /* Bigger status text */
       color: #ffcc00;
+      font-weight: bold;
     }
 
     .scoreboard {
-      margin-top: 10px;
-      font-size: 16px;
+      margin-top: 12px;
+      font-size: 20px;  /* Bigger scoreboard */
       background: #111;
-      padding: 10px;
+      padding: 12px;
       border-radius: 8px;
       display: inline-block;
     }
 
     button {
       margin-top: 15px;
-      padding: 10px 20px;
-      font-size: 16px;
+      padding: 12px 24px;
+      font-size: 18px;
       border: none;
       border-radius: 6px;
       background: #ffcc00;
@@ -124,12 +129,13 @@
 
     footer {
       margin-top: 20px;
-      font-size: 14px;
+      font-size: 18px;   /* Bigger footer */
       color: #aaa;
       text-align: center;
     }
     footer span {
       display: block;
+      margin-top: 5px;
     }
   </style>
 </head>
