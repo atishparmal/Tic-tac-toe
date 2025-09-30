@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Tic Tac Toe - Powered by Atish</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #000; /* Black background */
+      font-family: Arial, sans-serif;
+      color: white;
+      margin: 0;
+    }
+
+    .game {
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 10px;
+      color: #ffcc00;
+    }
+
+    .players {
+      margin-bottom: 15px;
+    }
+
+    input {
+      padding: 5px 10px;
+      margin: 5px;
+      border-radius: 5px;
+      border: none;
+    }
+
+    .board {
+      display: grid;
+      grid-template-columns: repeat(3, 100px);
+      grid-template-rows: repeat(3, 100px);
+      gap: 5px;
+      margin-top: 15px;
+    }
+
+    .cell {
+      width: 100px;
+      height: 100px;
+      background: #222;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 42px;
+      cursor: pointer;
+      border-radius: 12px;
+      user-select: none;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+
+    .cell.taken {
+      cursor: not-allowed;
+    }
+
+    .cell.x { color: #ff2e63; }   /* X = pink-red */
+    .cell.o { color: #00bfff; }   /* O = sky blue */
+    .cell.win {
+      background: #32cd32; /* Green for winning cells */
+      color: white !important;
+    }
+
+    #status {
+      margin-top: 15px;
+      font-size: 18px;
+      color: #ffcc00;
+    }
+
+    .scoreboard {
+      margin-top: 10px;
+      font-size: 16px;
+      background: #111;
+      padding: 10px;
+      border-radius: 8px;
+      display: inline-block;
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      background: #ffcc00;
+      color: black;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    button:hover {
+      background: #ffaa00;
+    }
+
+    footer {
+      margin-top: 20px;
+      font-size: 14px;
+      color: #aaa;
+      text-align: center;
+    }
+    footer span {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div class="game">
+    <h1>Tic Tac Toe</h1>
+
+    <!-- Player Name Inputs -->
+    <div class="players">
+      <input type="text" id="playerX" placeholder="Player X Name" value="Player X">
+      <input type="text" id="playerO" placeholder="Player O Name" value="Player O">
+      <button onclick="startGame()">Start Game</button>
+    </div>
+
+    <!-- Board -->
+    <div class="board" id="board"></div>
+
+    <!-- Status -->
+    <div id="status"></div>
+
+    <!-- Scoreboard -->
+    <div class="scoreboard" id="scoreboard">
+      <div id="scoreX">Player X: 0</div>
+      <div id="scoreO">Player O: 0</div>
+    </div>
+
+    <button onclick="resetBoard()">Next Round</button>
+    <button onclick="resetAll()">Restart Game</button>
+
+    <!-- Footer -->
+    <footer>
+      <span>Powered by Atish</span>
+      <span>Support: <a href="mailto:atishparmar578@gmail.com">atishparmar578@gmail.com</a></span>
+    </footer>
+  </div>
+
+  <script>
+    const board = document.getElementById("board");
+    const statusText = document.getElementById("status");
+    const scoreX = document.getElementById("scoreX");
+    const scoreO = document.getElementById("scoreO");
+
+    let cells = [];
+    let currentPlayer = "X";
+    let gameOver = false;
+    let playerNames = { X: "Player X", O: "Player O" };
+    let scores = { X: 0, O: 0 };
+
+    function startGame() {
+      playerNames.X = document.getElementById("playerX").value || "Player X";
+      playerNames.O = document.getElementById("playerO").value || "Player O";
+      resetBoard();
+    }
+
+    function createBoard() {
+      board.innerHTML = "";
+      cells = [];
+      for (let i = 0; i < 9; i++) {
+        const cell = document.createElement("div");
+        cell.classList.add("cell");
+        cell.addEventListener("click", () => handleClick(i));
+        board.appendChild(cell);
+        cells.push(cell);
+      }
+    }
+
+    function handleClick(i) {
+      if (cells[i].innerText !== "" || gameOver) return;
+      cells[i].innerText = currentPlayer;
+      cells[i].classList.add("taken", currentPlayer.toLowerCase());
+
+      if (checkWin(currentPlayer)) {
+        statusText.innerText = `🎉 ${playerNames[currentPlayer]} wins! 🎉`;
+        scores[currentPlayer]++;
+        updateScoreboard();
+        gameOver = true;
+        return;
+      }
+
+      if (cells.every(c => c.innerText !== "")) {
+        statusText.innerText = "🤝 It's a draw!";
+        gameOver = true;
+        return;
+      }
+
+      currentPlayer = currentPlayer === "X" ? "O" : "X";
+      statusText.innerText = `${playerNames[currentPlayer]}'s turn`;
+    }
+
+    function checkWin(player) {
+      const winPatterns = [
+        [0,1,2], [3,4,5], [6,7,8],
+        [0,3,6], [1,4,7], [2,5,8],
+        [0,4,8], [2,4,6]
+      ];
+      const playerCells = cells.map(c=>c.innerText);
+      for (let pattern of winPatterns) {
+        if (pattern.every(index => playerCells[index] === player)) {
+          pattern.forEach(i => cells[i].classList.add("win"));
+          return true;
+        }
+      }
+      return false;
+    }
+
+    function updateScoreboard() {
+      scoreX.innerText = `${playerNames.X}: ${scores.X}`;
+      scoreO.innerText = `${playerNames.O}: ${scores.O}`;
+    }
+
+    function resetBoard() {
+      currentPlayer = "X";
+      gameOver = false;
+      statusText.innerText = `${playerNames[currentPlayer]}'s turn`;
+      createBoard();
+    }
+
+    function resetAll() {
+      scores = { X: 0, O: 0 };
+      updateScoreboard();
+      resetBoard();
+    }
+
+    // Initialize
+    createBoard();
+  </script>
+</body>
+</html>
