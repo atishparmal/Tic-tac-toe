@@ -9,15 +9,19 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      min-height: 100vh;
       background: #000; /* Black background */
       font-family: Arial, sans-serif;
       color: white;
       margin: 0;
+      padding: 10px;
+      box-sizing: border-box;
     }
 
     .game {
       text-align: center;
+      width: 100%;
+      max-width: 500px;
     }
 
     h1 {
@@ -36,22 +40,24 @@
       border: none;
     }
 
+    /* Responsive game board */
     .board {
       display: grid;
-      grid-template-columns: repeat(3, 100px);
-      grid-template-rows: repeat(3, 100px);
+      grid-template-columns: repeat(3, 1fr);
       gap: 5px;
       margin-top: 15px;
+      width: 90vw;        /* take 90% of phone width */
+      max-width: 400px;   /* limit size on big screens */
+      aspect-ratio: 1;    /* always square */
     }
 
     .cell {
-      width: 100px;
-      height: 100px;
       background: #222;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 42px;
+      font-size: 12vw;   /* XO size scales with screen */
+      max-font-size: 60px;
       cursor: pointer;
       border-radius: 12px;
       user-select: none;
@@ -66,7 +72,7 @@
     .cell.x { color: #ff2e63; }   /* X = pink-red */
     .cell.o { color: #00bfff; }   /* O = sky blue */
     .cell.win {
-      background: #32cd32; /* Green for winning cells */
+      background: #32cd32; /* Green highlight */
       color: white !important;
     }
 
