@@ -21,7 +21,6 @@
     .game {
       text-align: center;
       width: 100%;
-      max-width: 500px;
     }
 
     h1 {
@@ -40,15 +39,15 @@
       border: none;
     }
 
-    /* Responsive game board */
+    /* Full-screen responsive board */
     .board {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 5px;
-      margin-top: 15px;
-      width: 90vw;        /* take 90% of phone width */
-      max-width: 400px;   /* limit size on big screens */
-      aspect-ratio: 1;    /* always square */
+      gap: 8px;
+      margin: 20px auto;
+      width: 95vw;         /* nearly full screen */
+      max-width: 95vw;     
+      aspect-ratio: 1;     /* always square */
     }
 
     .cell {
@@ -56,8 +55,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 12vw;   /* XO size scales with screen */
-      max-font-size: 60px;
+      font-size: 20vw;    /* super large X and O */
       cursor: pointer;
       border-radius: 12px;
       user-select: none;
