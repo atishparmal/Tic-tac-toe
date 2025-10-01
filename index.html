@@ -5,93 +5,44 @@
   <!-- ✅ Mobile viewport fix -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Tic Tac Toe - Powered by Atish</title>
-  
-  <!-- ✅ Google AdSense (replace ca-pub-xxxxxxxxxx with YOUR ID) -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-xxxxxxxxxxxxxxxx"
-          crossorigin="anonymous"></script>
 
-  <style>
-    body {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      background: #000;
-      font-family: Arial, sans-serif;
-      color: white;
-      margin: 0;
-      padding: 10px;
-      box-sizing: border-box;
-    }
-    .game { text-align: center; width: 100%; }
-    h1 { margin-bottom: 10px; color: #ffcc00; font-size: 32px; }
-    .players { margin-bottom: 15px; font-size: 18px; }
-    input { padding: 8px 12px; margin: 5px; border-radius: 5px; border: none; font-size: 16px; }
-    .board {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 8px; margin: 20px auto; width: 90vw; max-width: 90vw; aspect-ratio: 1;
-    }
-    .cell {
-      background: #222; display: flex; align-items: center; justify-content: center;
-      font-size: 14vw; cursor: pointer; border-radius: 12px; user-select: none; font-weight: bold;
-      transition: background 0.3s; aspect-ratio: 1;
-    }
-    .cell.taken { cursor: not-allowed; }
-    .cell.x { color: #ff2e63; }
-    .cell.o { color: #00bfff; }
-    .cell.win { background: #32cd32; color: white !important; }
-    @media (orientation: portrait) {
-      .board { width: 75vw; max-width: 75vw; }
-      .cell { font-size: 12vw; }
-    }
-    #status { margin-top: 15px; font-size: 22px; color: #ffcc00; font-weight: bold; }
-    .scoreboard {
-      margin-top: 12px; font-size: 20px; background: #111;
-      padding: 12px; border-radius: 8px; display: inline-block;
-    }
-    button {
-      margin-top: 15px; padding: 12px 24px; font-size: 18px;
-      border: none; border-radius: 6px; background: #ffcc00; color: black;
-      cursor: pointer; font-weight: bold;
-    }
-    button:hover { background: #ffaa00; }
-    footer { margin-top: 20px; font-size: 18px; color: #aaa; text-align: center; }
-    footer span { display: block; margin-top: 5px; }
-  </style>
+  <!-- ✅ Google AdSense verification script (your publisher ID) -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3263553290467593"
+          crossorigin="anonymous"></script>
 </head>
-<body>
-  <div class="game">
-    <h1>Tic Tac Toe</h1>
+<body style="background:#000; color:white; font-family:Arial, sans-serif; margin:0; padding:10px; display:flex; flex-direction:column; align-items:center; min-height:100vh;">
+
+  <div class="game" style="text-align:center; width:100%;">
+    <h1 style="color:#ffcc00; font-size:32px;">Tic Tac Toe</h1>
 
     <!-- Player Name Inputs -->
-    <div class="players">
-      <input type="text" id="playerX" placeholder="Player X Name" value="Player X">
-      <input type="text" id="playerO" placeholder="Player O Name" value="Player O">
-      <button onclick="startGame()">Start Game</button>
+    <div class="players" style="margin-bottom:15px; font-size:18px;">
+      <input type="text" id="playerX" placeholder="Player X Name" value="Player X" style="padding:8px 12px; margin:5px; border-radius:5px; border:none; font-size:16px;">
+      <input type="text" id="playerO" placeholder="Player O Name" value="Player O" style="padding:8px 12px; margin:5px; border-radius:5px; border:none; font-size:16px;">
+      <button onclick="startGame()" style="margin-top:10px; padding:12px 24px; font-size:18px; border:none; border-radius:6px; background:#ffcc00; color:black; cursor:pointer; font-weight:bold;">Start Game</button>
     </div>
 
     <!-- Board -->
-    <div class="board" id="board"></div>
+    <div id="board" style="display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin:20px auto; width:90vw; max-width:90vw; aspect-ratio:1;"></div>
 
     <!-- Status -->
-    <div id="status"></div>
+    <div id="status" style="margin-top:15px; font-size:22px; color:#ffcc00; font-weight:bold;"></div>
 
     <!-- Scoreboard -->
-    <div class="scoreboard" id="scoreboard">
+    <div id="scoreboard" style="margin-top:12px; font-size:20px; background:#111; padding:12px; border-radius:8px; display:inline-block;">
       <div id="scoreX">Player X: 0</div>
       <div id="scoreO">Player O: 0</div>
     </div>
 
-    <button onclick="resetBoard()">Next Round</button>
-    <button onclick="resetAll()">Restart Game</button>
+    <button onclick="resetBoard()" style="margin-top:15px; padding:12px 24px; font-size:18px; border:none; border-radius:6px; background:#ffcc00; color:black; cursor:pointer; font-weight:bold;">Next Round</button>
+    <button onclick="resetAll()" style="margin-top:15px; padding:12px 24px; font-size:18px; border:none; border-radius:6px; background:#ffcc00; color:black; cursor:pointer; font-weight:bold;">Restart Game</button>
 
     <!-- ✅ Banner Ad under scoreboard -->
     <div style="margin:20px 0;">
       <ins class="adsbygoogle"
            style="display:block; text-align:center;"
-           data-ad-client="ca-pub-xxxxxxxxxxxxxxxx"  <!-- Replace with your ID -->
-           data-ad-slot="1234567890"                <!-- Replace with your slot ID -->
+           data-ad-client="ca-pub-3263553290467593"
+           data-ad-slot="1234567890"   <!-- 🔑 Replace with your ad slot ID -->
            data-ad-format="auto"></ins>
       <script>
            (adsbygoogle = window.adsbygoogle || []).push({});
@@ -99,16 +50,16 @@
     </div>
 
     <!-- Footer -->
-    <footer>
+    <footer style="margin-top:20px; font-size:18px; color:#aaa; text-align:center;">
       <span>Powered by Atish</span>
-      <span>Support: <a href="mailto:atishparmar578@gmail.com">atishparmar578@gmail.com</a></span>
-      
+      <span>Support: <a href="mailto:atishparmar578@gmail.com" style="color:#ffcc00;">atishparmar578@gmail.com</a></span>
+
       <!-- ✅ Banner Ad in footer -->
       <div style="margin-top:20px;">
         <ins class="adsbygoogle"
              style="display:block; text-align:center;"
-             data-ad-client="ca-pub-xxxxxxxxxxxxxxxx" <!-- Replace with your ID -->
-             data-ad-slot="0987654321"               <!-- Replace with your slot ID -->
+             data-ad-client="ca-pub-3263553290467593"
+             data-ad-slot="0987654321"   <!-- 🔑 Replace with your ad slot ID -->
              data-ad-format="auto"></ins>
         <script>
              (adsbygoogle = window.adsbygoogle || []).push({});
@@ -140,7 +91,7 @@
       cells = [];
       for (let i = 0; i < 9; i++) {
         const cell = document.createElement("div");
-        cell.classList.add("cell");
+        cell.style.cssText = "background:#222; display:flex; align-items:center; justify-content:center; font-size:14vw; cursor:pointer; border-radius:12px; font-weight:bold; aspect-ratio:1;";
         cell.addEventListener("click", () => handleClick(i));
         board.appendChild(cell);
         cells.push(cell);
@@ -150,7 +101,7 @@
     function handleClick(i) {
       if (cells[i].innerText !== "" || gameOver) return;
       cells[i].innerText = currentPlayer;
-      cells[i].classList.add("taken", currentPlayer.toLowerCase());
+      cells[i].style.color = currentPlayer === "X" ? "#ff2e63" : "#00bfff";
 
       if (checkWin(currentPlayer)) {
         statusText.innerText = `🎉 ${playerNames[currentPlayer]} wins! 🎉`;
@@ -179,7 +130,7 @@
       const playerCells = cells.map(c=>c.innerText);
       for (let pattern of winPatterns) {
         if (pattern.every(index => playerCells[index] === player)) {
-          pattern.forEach(i => cells[i].classList.add("win"));
+          pattern.forEach(i => cells[i].style.background="#32cd32");
           return true;
         }
       }
@@ -208,4 +159,4 @@
     createBoard();
   </script>
 </body>
-</html>
+        </html>
